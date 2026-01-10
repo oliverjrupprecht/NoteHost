@@ -1,11 +1,13 @@
 from enum import Enum
+from htmlnode import HTMLNode, LeafNode
 
 class TextType(Enum):
-    PLAIN_TEXT = "plain"
-    ITALIC_TEXT = "italic"
-    CODE_TEXT = "code"
-    LINK_TEXT = "link"
-    IMAGE_TEXT = "image"
+    TEXT = "text"
+    BOLD = "bold"
+    ITALIC = "italic"
+    CODE = "code"
+    LINK = "link"
+    IMAGE = "image"
 
 class TextNode:
     def __init__(self, text, text_type, url=None):
@@ -20,13 +22,33 @@ class TextNode:
             return False
 
 
-        rt = (
+        return (
                 self.text == other.text and 
                 self.text_type == other.text_type and 
                 self.url == other.url
                 )
 
-        return rt
 
     def __repr__(self):
         return f"TextNode({self.text}, {self.text_type}, {self.url})"
+
+def text_node_to_html_node(text_node : TextNode):
+    if not isinstance(text_node, TextNode):
+        raise ValueError
+
+    match text_node.text_type:
+        case TextType.TEXT:
+            return LeafNode(tag= None, value=text_node.text)
+        case TextType.BOLD:
+            return LeafNode(tag= "b", value=text_node.text)
+        case TextType.ITALIC:
+            return LeafNode(tag= "i", value=text_node.text)
+        case TextType.CODE:
+            return LeafNode(tag= "code", value=text_node.text)
+        case TextType.LINK:
+            return LeafNode(tag= "a", value=text_node.text, props={"href":text_node.url})
+        case TextType.IMAGE:
+            return LeafNode(tag= "img", value= "", props= {"src":text_node.url, "alt":text_node.text})
+        case _:
+            raise ValueError("unknown enum")
+
