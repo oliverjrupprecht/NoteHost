@@ -1,7 +1,10 @@
 from textnode import TextType, TextNode
-from htmlnode import LeafNode
 
-
+def Delimiter(Enum): # if I want to implement nested stuff later
+    DQUOTES = "\""
+    SQUOTES = "\'"
+    DASTERISK = "**"
+    UNDERSCORE = "_"
 
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
@@ -39,11 +42,8 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
     return new_nodes
 
-print(split_nodes_delimiter([TextNode("This is text with a `code block` word", TextType.TEXT)], "`", TextType.CODE))
 
-print(split_nodes_delimiter([TextNode("This is text with a **bold** word", TextType.TEXT)], "**", TextType.BOLD))
 
-print(split_nodes_delimiter([TextNode("This is text with a _italic_ word", TextType.TEXT)], "_", TextType.ITALIC))
 
 
                                 
