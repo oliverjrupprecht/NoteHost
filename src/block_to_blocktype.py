@@ -7,7 +7,7 @@ def block_to_blocktype(blk : str):
     heading_m = re.fullmatch(r"^#{1,6} .*", blk) # headings should only be one line
     if heading_m is not None:
         index = 0
-        while heading_m[index] != " ":
+        while heading_m.group(0)[index] != " ":
             index += 1
 
         match index:

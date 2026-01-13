@@ -1,22 +1,23 @@
+<!doctype html>
 <html>
   <head>
-    <title>Why Frontend Development Sucks</title>
-    <link rel="stylesheet" href="/styles.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ Title }}</title>
+    <link href="/index.css" rel="stylesheet" />
   </head>
+
   <body>
-    <h1>Front-end Development is the Worst</h1>
-    <p>
-      Look, front-end development is for script kiddies and soydevs who can't
-      handle the real programming. I mean, it's just a bunch of divs and spans,
-      right? And css??? It's like, "Oh, I want this to be red, but not thaaaaat
-      red." What a joke.
-    </p>
-    <p>
-      Real programmers code, not silly markup languages. They code on Arch
-      Linux, not macOS, and certainly not Windows. They use Vim, not VS Code.
-      They use C, not HTML. Come to the
-      <a href="https://www.boot.dev">backend</a>, where the real programming
-      happens.
-    </p>
+    <article><div><h1># Introduction</h1><p>Abstract Data Types (via Data Structures) allow us to create more advanced and efficient algorithms. They do this by providing more efficient ways of accessing the data we are using in our algorithm. This can decrease the time and space complexity of algorithms, in addition to simplifiying the logic (making them easier to follow).</p><h2>## Data Structures</h2><p>DSs are concrete implementations that define how the data is actually stored in memory, and how it is accessed.</p><p><b>Arrays</b> -> sequentially stored values in memory:</p><ul><li>O(1) for reading data</li><li>O(1) for appending values to the end</li><li>O(n) for adding or removing values within (values must be shifted up)</li></ul><p><b>Linked Lists</b> -> values stored as nodes in a chain, with each node pointing to the next:</p><ul><li>O(n) for reading data within the array</li><li>O(1) for reading or adding data to the head</li></ul><p><b>Trees</b> -> Each node must have one parent, and can have many children. Essentially a linked list.</p><h3>### Abstract Data Types</h3><p>ADTs define operations that you can apply to them. They can be thought of as an interface, you dont need to know anything about the implementation, you can simply just use the defined operations.</p><p><b>Stacks</b> -> FIFO, best implemented by an array, its operations are:</p><p>- pop, removes an element from the top
+- push, adds an element to the top 
+       
+<b>Queue</b> -> FILO, best implemented with a linked list</p><ul><li>enqueue, adds an element to the start</li><li>dequeue, removes an element from the end</li></ul><p><b>Binary Trees</b> -> Each node can have at most two children, where the left child has a value less than the parent, and the right has one greater</p><ul><li>delete in O(log n) time</li><li>add in O(log n) time</li><li>searching in O(log n) time</li></ul><p>*if the tree becomes unbalanced (multiple values that are greater than the last are added) then operating in the tree starts to trend towards linear time.
+-> this is where self balancing trees come in, they preserve the balance*</p><p><b>Self-Balancing Trees</b> -> A type of tree that preserves its balance by performing 'rotations' when sub-branches get too long. This keeps the tree shallow and therefore fast!</p><p>- A rotation is where a parent node and one of its children are 'roatated' around, this can shorted a tree if one of its subtrees is longer than the other.
+- Everytime a deletion or insertion occurs in the tree, it checks itself to see whether it needs to rotate (via a set of conditions), this this preserves O(log n) time for its operations.
+- One example of this is the Red-Black tree
+               
+<b>Hash Maps</b> -> Store 'hashable' keys, that when inputted into a hash function return an index in an array, where a value can be stored.</p><ul><li>addition, deletion and retrieval is O(n) (in an optimised HM)</li></ul><p>*There are different implementations to avoid collisions (when two different keys hit the same index in the array)*
+-> linear programming, if a collision occurs during an operation then while entries in the array are not none traverse the array, until you find a place to insert (this happens for every element), obviously as the list gets fuller operations deteriorate to O(n) 
+-> chaining, if a collision occurs then at that index a linked list is created (in the py implementation, if that list becomes too large it is turned into a RB tree)</p><p><b>Tries</b> -> Trees with a variable number of nodes</p><ul><li>adding or checking for presence of a word within a trie is O(n) (if the trie is implemented with hashmaps)</li></ul><p>*They are best for finding suffixes*</p><p><b>Graphs</b> -> Made up of verticies (nodes) and edges (joins between in verticies)</p></div></article>
   </body>
 </html>
