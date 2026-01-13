@@ -6,7 +6,17 @@ def block_to_blocktype(blk : str):
     
     heading_m = re.fullmatch(r"^#{1,6} .*", blk) # headings should only be one line
     if heading_m is not None:
-        return BlockType.HEADING
+        index = 0
+        while heading_m[index] != " ":
+            index += 1
+
+        match index:
+            case 1: return BlockType.HEADING1
+            case 2: return BlockType.HEADING2
+            case 3: return BlockType.HEADING3
+            case 4: return BlockType.HEADING4
+            case 5: return BlockType.HEADING5
+            case 6: return BlockType.HEADING6
 
     code_block_m = re.fullmatch(r"^```\n.*\n```$", blk) # code blocks should start and end with three backticks on a seperate line
     if code_block_m is not None:

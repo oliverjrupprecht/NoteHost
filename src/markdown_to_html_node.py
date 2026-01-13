@@ -15,8 +15,23 @@ def markdown_to_html_node(markdown):
                 div_children.append(
                     ParentNode("p", text_to_children(block[0]) ))
 
-            case BlockType.HEADING:
+            case BlockType.HEADING1:
                 div_children.append(ParentNode("h1", text_to_children(block[0]) ))
+                
+            case BlockType.HEADING2:
+                div_children.append(ParentNode("h2", text_to_children(block[0]) ))
+                
+            case BlockType.HEADING3:
+                div_children.append(ParentNode("h3", text_to_children(block[0]) ))
+                
+            case BlockType.HEADING4:
+                div_children.append(ParentNode("h4", text_to_children(block[0]) ))
+                
+            case BlockType.HEADING5:
+                div_children.append(ParentNode("h5", text_to_children(block[0]) ))
+                
+            case BlockType.HEADING6:
+                div_children.append(ParentNode("h6", text_to_children(block[0]) ))
                 
             case BlockType.CODE:
                 div_children.append(
@@ -39,8 +54,13 @@ def text_to_children(text) -> list[HTMLNode] :
     textnodes = text_to_textnodes(text)
     return [text_node_to_html_node(tn) for tn in textnodes]
 
+def extract_title(markdown : str):
+    for line in markdown.split("\n"):
+        if line.startswith("# "):
+            return line[2:].strip()
 
 md = """
+# this is has a header
 This is **bolded** paragraph
 text in a p
 tag here
@@ -50,6 +70,16 @@ This is another paragraph with _italic_ text and `code` here
 another para with a link [blub](pub)
 """
 
+x = """ 
+this isnt has a header
+This is **bolded** paragraph
+text in a p
+tag here
+"""
+
+
+print(extract_title(md))
+print(markdown_to_html_node(md))
 
 cd = """
 ```
