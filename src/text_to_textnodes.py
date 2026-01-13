@@ -6,9 +6,10 @@ from split_nodes_image import split_nodes_image
 
 def text_to_textnodes(text):
     tn = TextNode(text, TextType.TEXT)
-    return split_nodes_image(
-            split_nodes_link(
-                split_nodes_delimiter(
-                    split_nodes_delimiter(
-                        split_nodes_delimiter([tn], "**", TextType.BOLD), "`", TextType.CODE), "_", TextType.ITALIC)))
+    partial = split_nodes_delimiter(split_nodes_delimiter(split_nodes_delimiter([tn], "**", TextType.BOLD), "`", TextType.CODE), "_", TextType.ITALIC)
+    links = split_nodes_link(split_nodes_image(partial))
+    return links
+
+
+#print(text_to_textnodes("image right here ![here](urelly) this is _italic_ and this **bolded** now heres a link [hello](url) ok"))
 

@@ -1,11 +1,5 @@
 from textnode import TextType, TextNode
 
-def Delimiter(Enum): # if I want to implement nested stuff later
-    DQUOTES = "\""
-    SQUOTES = "\'"
-    DASTERISK = "**"
-    UNDERSCORE = "_"
-
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
     for node in old_nodes:

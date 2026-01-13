@@ -1,5 +1,5 @@
 class HTMLNode:
-    def __init__(self, tag=None, value=None, children=None, props=None):
+    def __init__(self, tag=None, value=None, children=None, props=None ):
         self.tag = tag # str representing HTML node name
         self.value = value # str representing text inside the node
         self.children = children # [] of child nodes
@@ -36,25 +36,18 @@ class HTMLNode:
         return out
             
 class LeafNode(HTMLNode):
-    def __init__(self, tag, value, props=None):
+    def __init__(self, tag : str, value : str, props=None):
         super().__init__(tag, value, None, props)
 
-
-    def __repr__(self):
-        return f"LeafNode({self.tag}, {self.value}, {self.props_to_html()})"
-    
     def to_html(self):
         if self.value is None:
             raise ValueError
         
         if self.tag is None:
             return self.value
-    
-        if not self.props:
-            return f"<{self.tag}>{self.value}</{self.tag}>"
-        else:
-            return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>"
 
+        return f"<{self.tag}>{self.value}</{self.tag}>"
+    
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
         super().__init__(tag, None, children, props)
@@ -69,14 +62,15 @@ class ParentNode(HTMLNode):
         if not self.props:
             out = f"<{self.tag}>"
             for child in self.children:
-                out += child.to_html()
+                html = child.to_html()
+                if html:
+                    out += html
+
         else:
             out = f"<{self.tag} {self.props_to_html()}>"
             for child in self.children:
-                out += child.to_html()
+                html = child.to_html()
+                if html:
+                    out += html 
 
         return out + f"</{self.tag}>"
-
-
-    
-
